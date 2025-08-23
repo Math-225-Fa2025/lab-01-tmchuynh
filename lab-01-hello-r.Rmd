@@ -377,11 +377,12 @@ Facet by the dataset variable, placing the plots in a 3 column grid, and don't a
 Finally, let's plot all datasets at once.
 In order to do this we will make use of faceting.
 
-```{r all-viz, eval=FALSE, fig.fullwidth=TRUE}
-ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
-  geom_point()+
+```{r all-viz, eval=FALSE, fig.fullwidth=TRUE, fig.height=12, fig.width=10}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset)) +
+  geom_point() +
   facet_wrap(~ dataset, ncol = 3) +
   theme(legend.position = "none")
+
 ```
 
 And we can use the `group_by` function to generate all the summary correlation coefficients.
@@ -420,7 +421,7 @@ You can change them by defining different values directly in your R Markdown doc
 knitr::include_graphics("img/theme-highlight.png")
 ```
 
--   **Change the look of your report:**
+## **Change the look of your report:**
 
 Once again click on the gear icon in on top of the R Markdown document, and select "Output Options..." in the dropdown menu.
 In the General tab of the pop up dialogue box try out different Syntax highlighting and theme options.
