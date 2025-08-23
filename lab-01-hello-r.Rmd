@@ -1,25 +1,17 @@
 ---
 title: "Lab 01 - Hello R!"
-output: 
-  tufte::tufte_html:
-    css: ../lab.css
-    tufte_variant: "envisioned"
-    highlight: pygments
+output: pdf_document
 link-citations: true
 editor_options: 
   markdown: 
     wrap: sentence
 ---
 
-```{marginfigure}
-R is the name of the programming language itself and RStudio is a convenient interface.
-```
+> R is the name of the programming language itself and RStudio is a convenient interface.
 
 The main goal of this lab is to introduce you to R and RStudio, which we will be using throughout the course both to learn the statistical concepts discussed in the course and to analyze real data and come to informed conclusions.
 
-```{marginfigure}
-git is a version control system (like "Track Changes" features from Microsoft Word on steroids) and GitHub is the home for your Git-based projects on the internet (like DropBox but much, much better).
-```
+> git is a version control system (like "Track Changes" features from Microsoft Word on steroids) and GitHub is the home for your Git-based projects on the internet (like DropBox but much, much better).
 
 An additional goal is to introduce you to Git and GitHub, which is the collaboration and version control system that we will be using throughout the course.
 
@@ -108,9 +100,10 @@ knitr::include_graphics("img/paste-gh-repo-url.png")
 
 Before we introduce the data, let's warm up with some simple exercises.
 
-```{marginfigure}
-The top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for "YAML Ain't Markup Language". It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
-```
+> The top portion of your R Markdown file (between the three dashed lines) is called YAML.
+> It stands for "YAML Ain't Markup Language".
+> It is a human friendly data serialization standard for all programming languages.
+> All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
 
 ### YAML
 
@@ -168,9 +161,8 @@ Note that the packages are also loaded with the same commands in your R Markdown
 
 ## Data
 
-```{marginfigure}
-If it's confusing that the data frame is called `datasaurus_dozen` when it contains 13 datasets, you're not alone! Have you heard of a [baker's dozen](https://en.wikipedia.org/wiki/Dozen#Baker's_dozen)?
-```
+> If it's confusing that the data frame is called `datasaurus_dozen` when it contains 13 datasets, you're not alone!
+> Have you heard of a [baker's dozen](https://en.wikipedia.org/wiki/Dozen#Baker's_dozen)?
 
 The data frame we will be working with today is called `datasaurus_dozen` and it's in the `datasauRus` package.
 Actually, this single data frame contains 13 datasets, designed to show us why data visualisation is important and how summary statistics alone can be misleading.
@@ -201,9 +193,9 @@ datasaurus_dozen %>%
   print(13)
 ```
 
-```{marginfigure}
-Matejka, Justin, and George Fitzmaurice. "Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing." Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems. ACM, 2017.
-```
+> Matejka, Justin, and George Fitzmaurice.
+> "Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing." Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems.
+> ACM, 2017.
 
 The original Datasaurus (`dino`) was created by Alberto Cairo in [this great blog post](http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html).
 The other Dozen were generated using simulated annealing and the process is described in the paper *Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics* through Simulated Annealing by Justin Matejka and George Fitzmaurice.
@@ -305,9 +297,7 @@ In this case, calculating a correlation coefficient really doesn't make sense si
 
 But, for illustrative purposes, let's calculate the correlation coefficient between `x` and `y`.
 
-```{marginfigure}
-Start with `dino_data` and calculate a summary statistic that we will call `r` as the `cor`relation between `x` and `y`.
-```
+> Start with `dino_data` and calculate a summary statistic that we will call `r` as the `cor`relation between `x` and `y`.
 
 ```{r}
 dino_data %>%
@@ -368,9 +358,7 @@ add_corr(circle_data, "circle")
 
 🧶 ✅ ⬆️ *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-```{marginfigure}
-Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
-```
+> Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
 
 ## Exercise #5
 
@@ -430,8 +418,8 @@ Play around with these until you're happy with the look.
 
 ------------------------------------------------------------------------
 
-```{marginfigure}
-Not sure how to use emojis on your computer? Maybe a teammate can help? Or you can ask your TA as well!
-```
+> Not sure how to use emojis on your computer?
+> Maybe a teammate can help?
+> Or you can ask your TA as well!
 
 🧶 ✅ ⬆️ *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!* 💪*", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
