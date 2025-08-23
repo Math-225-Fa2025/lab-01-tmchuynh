@@ -355,6 +355,22 @@ add_corr(circle_data, "circle")
 Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
 ```
 
+```{r}
+ggplot(correlation_log, aes(x = step, y = r)) +
+  geom_line() +
+  geom_point(size = 2) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  scale_x_continuous(
+    breaks = correlation_log$step,
+    labels = correlation_log$dataset
+  ) +
+  labs(
+    title = "Correlation log (updates as you add)",
+    x = "Dataset (order added)",
+    y = "Pearson r"
+  )
+```
+
 ## Exercise #5
 
 Finally, let's plot all datasets at once.
@@ -382,7 +398,7 @@ You're done with the data analysis exercises, but we'd like you to do two more t
 knitr::include_graphics("img/fig-resize-global.png")
 ```
 
--   **Resize your figures:**
+# **Resize your figures**
 
 Click on the gear icon in on top of the R Markdown document, and select "Output Options..." in the dropdown menu.
 In the pop up dialogue box go to the Figures tab and change the height and width of the figures, and hit OK when done.
@@ -417,3 +433,35 @@ Not sure how to use emojis on your computer? Maybe a teammate can help? Or you c
 ```
 
 🧶 ✅ ⬆️ *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!* 💪*", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
+
+------------------------------------------------------------------------
+
+# Notes
+
+## What a correlation tells us
+
+-   **Correlation (Pearson’s r)** measures the *strength* and *direction* of a linear relationship between two variables.
+
+-   Values range from **−1 to +1**:
+
+    -   **+1** → perfect positive linear relationship (as x increases, y increases proportionally).
+
+    -   **0** → no linear relationship (x doesn’t predict y in a straight-line sense).
+
+    -   **−1** → perfect negative linear relationship (as x increases, y decreases proportionally).
+
+-   Example: if you had test scores and study hours, a correlation near +0.8 would mean “more hours tends to mean higher scores.”
+
+## What the difference in correlations tells us
+
+-   Comparing correlations across datasets (like **dino**, **star**, **circle**) shows whether the *strength or direction* of linear association changes.
+
+-   In the Datasaurus datasets, the correlations are **nearly identical (\~ −0.06)** even though the scatterplots are visually *completely different*.
+
+    -   That means the **correlation value alone does not capture the full story** — two very different data shapes can yield the same r.
+
+-   The “difference” in correlation is meaningful only if the underlying patterns *really differ in linearity*.
+
+    -   Example: comparing r = 0.9 vs r = 0.2 tells you that one dataset has a strong linear relationship, while the other has a weak one.
+
+    -   But when all r values are similar (like here), it highlights that **summary stats can be misleading without visualization**.
