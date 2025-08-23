@@ -272,7 +272,7 @@ star_data <- datasaurus_dozen |>
 
 ```{r}
 ggplot(star_data, aes(x = x, y = y))+
-  geom_point()
+  geom_point() 
 ```
 
 🧶 ✅ ⬆️ *This is another good place to pause, knit, commit changes with the commit message "Added answer for Ex 3", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
