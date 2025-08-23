@@ -182,7 +182,11 @@ This command must be ran in the Console.
 
 # Exercises
 
-1.  Based on the help file, how many rows and how many columns does the `datasaurus_dozen` file have? What are the variables included in the data frame? Add your responses to your lab report.
+## Exercise #1
+
+Based on the help file, how many rows and how many columns does the `datasaurus_dozen` file have?
+What are the variables included in the data frame?
+Add your responses to your lab report.
 
 ```{r}
 datasaurus_dozen %>% glimpse()
@@ -205,9 +209,41 @@ The original Datasaurus (`dino`) was created by Alberto Cairo in [this great blo
 The other Dozen were generated using simulated annealing and the process is described in the paper *Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics* through Simulated Annealing by Justin Matejka and George Fitzmaurice.
 In the paper, the authors simulate a variety of datasets that have the same summary statistics as the Datasaurus but have very different distributions.
 
+```{r}
+correlation_log <- tibble::tibble(
+  step = integer(),
+  dataset = character(),
+  r = numeric(),
+  n = integer(),
+  method = character(),
+  time = as.POSIXct(character())
+)
+```
+
+```{r}
+add_corr <- function(df, dataset_label, x_col = "x", y_col = "y", method = "pearson") {
+  stopifnot(x_col %in% names(df), y_col %in% names(df))
+  r_val <- stats::cor(df[[x_col]], df[[y_col]], method = method, use = "complete.obs")
+  new_row <- tibble::tibble(
+    step = if (nrow(corr_log) == 0) 1L else max(corr_log$step) + 1L,
+    dataset = dataset_label,
+    r = r_val,
+    n = nrow(df),
+    method = method,
+    time = Sys.time()
+  )
+  # append to the persistent log
+  corr_log <<- dplyr::bind_rows(corr_log, new_row)
+  new_row
+}
+```
+
 🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 1". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-2.  Plot `y` vs. `x` for the `dino` dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset.
+## Exercise #2
+
+Plot `y` vs. `x` for the `dino` dataset.
+Then, calculate the correlation coefficient between `x` and `y` for this dataset.
 
 Below is the code you will need to complete this exercise.
 Basically, the answer is already given, but you need to include relevant bits in your Rmd document and successfully knit it and view the results.
@@ -263,7 +299,12 @@ dino_data %>%
 
 🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 2". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-3.  Plot `y` vs. `x` for the `star` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. How does this value compare to the `r` of `dino`?
+## Exercise #3
+
+Plot `y` vs. `x` for the `star` dataset.
+You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset.
+Then, calculate the correlation coefficient between `x` and `y` for this dataset.
+How does this value compare to the `r` of `dino`?
 
 ```{r}
 star_data <- datasaurus_dozen |>
@@ -275,9 +316,33 @@ ggplot(star_data, aes(x = x, y = y))+
   geom_point() 
 ```
 
+```{r}
+star_data %>%
+  summarize(r = cor(x, y))
+```
+
 🧶 ✅ ⬆️ *This is another good place to pause, knit, commit changes with the commit message "Added answer for Ex 3", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-4.  Plot `y` vs. `x` for the `circle` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. How does this value compare to the `r` of `dino`?
+## Exercise #4
+
+Plot `y` vs. `x` for the `circle` dataset.
+You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset.
+Then, calculate the correlation coefficient between `x` and `y` for this dataset.
+How does this value compare to the `r` of `dino`?
+
+```{r}
+circle_data <- datasaurus_dozen %>% filter(dataset == "circle")
+```
+
+```{r}
+ggplot(circle_data, aes(x = x, y = y)) +
+  geom_point() +
+  labs(title = "Datasaurus: circle", x = "x", y = "y")
+```
+
+```{r}
+circle_data %>% summarize(r = cor(x, y))  # ≈ same r as dino
+```
 
 🧶 ✅ ⬆️ *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
@@ -285,7 +350,10 @@ ggplot(star_data, aes(x = x, y = y))+
 Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
 ```
 
-5.  Finally, let's plot all datasets at once. In order to do this we will make use of faceting.
+## Exercise #5
+
+Finally, let's plot all datasets at once.
+In order to do this we will make use of faceting.
 
 ```{r all-viz, eval=FALSE, fig.fullwidth=TRUE}
 ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
@@ -337,7 +405,7 @@ In the General tab of the pop up dialogue box try out different Syntax highlight
 Hit OK and knit your document to see how it looks.
 Play around with these until you're happy with the look.
 
-<br>
+------------------------------------------------------------------------
 
 ```{marginfigure}
 Not sure how to use emojis on your computer? Maybe a teammate can help? Or you can ask your TA as well!
