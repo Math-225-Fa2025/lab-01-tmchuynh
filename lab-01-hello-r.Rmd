@@ -417,11 +417,11 @@ To do so click on the gear icon within the chunk where you want to make a change
 Changing the figure sizes added new options to these chunks: `fig.width` and `fig.height`.
 You can change them by defining different values directly in your R Markdown document as well.
 
-```{r theme-highlight, fig.margin = TRUE, echo = FALSE, fig.width=3}
+```{r theme-highlight, echo=FALSE, fig.margin=TRUE}
 knitr::include_graphics("img/theme-highlight.png")
 ```
 
-## **Change the look of your report:**
+# **Change the look of your report:**
 
 Once again click on the gear icon in on top of the R Markdown document, and select "Output Options..." in the dropdown menu.
 In the General tab of the pop up dialogue box try out different Syntax highlighting and theme options.
@@ -435,35 +435,3 @@ Not sure how to use emojis on your computer? Maybe a teammate can help? Or you c
 ```
 
 🧶 ✅ ⬆️ *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!* 💪*", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
-
-------------------------------------------------------------------------
-
-# Notes
-
-## What a correlation tells us
-
--   **Correlation (Pearson’s r)** measures the *strength* and *direction* of a linear relationship between two variables.
-
--   Values range from **−1 to +1**:
-
-    -   **+1** → perfect positive linear relationship (as x increases, y increases proportionally).
-
-    -   **0** → no linear relationship (x doesn’t predict y in a straight-line sense).
-
-    -   **−1** → perfect negative linear relationship (as x increases, y decreases proportionally).
-
--   Example: if you had test scores and study hours, a correlation near +0.8 would mean “more hours tends to mean higher scores.”
-
-## What the difference in correlations tells us
-
--   Comparing correlations across datasets (like **dino**, **star**, **circle**) shows whether the *strength or direction* of linear association changes.
-
--   In the Datasaurus datasets, the correlations are **nearly identical (\~ −0.06)** even though the scatterplots are visually *completely different*.
-
-    -   That means the **correlation value alone does not capture the full story** — two very different data shapes can yield the same r.
-
--   The “difference” in correlation is meaningful only if the underlying patterns *really differ in linearity*.
-
-    -   Example: comparing r = 0.9 vs r = 0.2 tells you that one dataset has a strong linear relationship, while the other has a weak one.
-
-    -   But when all r values are similar (like here), it highlights that **summary stats can be misleading without visualization**.
