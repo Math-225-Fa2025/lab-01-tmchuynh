@@ -236,6 +236,23 @@ add_corr <- function(df, dataset_label, x_col = "x", y_col = "y", method = "pear
   correlation_log <<- dplyr::bind_rows(correlation_log, new_row)
   new_row
 }
+
+```
+
+```{r}
+ggplot(correlation_log, aes(x = step, y = r)) +
+  geom_line() +
+  geom_point(size = 2) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  scale_x_continuous(
+    breaks = correlation_log$step,
+    labels = correlation_log$dataset
+  ) +
+  labs(
+    title = "Correlation log (updates as you add)",
+    x = "Dataset (order added)",
+    y = "Pearson r"
+  )
 ```
 
 🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 1". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
@@ -353,22 +370,6 @@ add_corr(circle_data, "circle")
 
 ```{marginfigure}
 Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
-```
-
-```{r}
-ggplot(correlation_log, aes(x = step, y = r)) +
-  geom_line() +
-  geom_point(size = 2) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  scale_x_continuous(
-    breaks = correlation_log$step,
-    labels = correlation_log$dataset
-  ) +
-  labs(
-    title = "Correlation log (updates as you add)",
-    x = "Dataset (order added)",
-    y = "Pearson r"
-  )
 ```
 
 ## Exercise #5
