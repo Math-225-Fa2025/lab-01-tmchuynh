@@ -321,6 +321,8 @@ ggplot(star_data, aes(x = x, y = y))+
 ```{r}
 star_data %>%
   summarize(r = cor(x, y))
+
+add_corr(star_data, "star")
 ```
 
 🧶 ✅ ⬆️ *This is another good place to pause, knit, commit changes with the commit message "Added answer for Ex 3", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
@@ -343,7 +345,8 @@ ggplot(circle_data, aes(x = x, y = y)) +
 ```
 
 ```{r}
-circle_data %>% summarize(r = cor(x, y))  # ≈ same r as dino
+circle_data %>% summarize(r = cor(x, y))
+add_corr(circle_data, "circle")
 ```
 
 🧶 ✅ ⬆️ *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
