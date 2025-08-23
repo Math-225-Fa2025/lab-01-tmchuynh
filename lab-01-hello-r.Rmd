@@ -225,7 +225,7 @@ add_corr <- function(df, dataset_label, x_col = "x", y_col = "y", method = "pear
   stopifnot(x_col %in% names(df), y_col %in% names(df))
   r_val <- stats::cor(df[[x_col]], df[[y_col]], method = method, use = "complete.obs")
   new_row <- tibble::tibble(
-    step = if (nrow(corr_log) == 0) 1L else max(corr_log$step) + 1L,
+    step = if (nrow(correlation_log) == 0) 1L else max(correlation_log$step) + 1L,
     dataset = dataset_label,
     r = r_val,
     n = nrow(df),
@@ -233,7 +233,7 @@ add_corr <- function(df, dataset_label, x_col = "x", y_col = "y", method = "pear
     time = Sys.time()
   )
   # append to the persistent log
-  corr_log <<- dplyr::bind_rows(corr_log, new_row)
+  correlation_log <<- dplyr::bind_rows(correlation_log, new_row)
   new_row
 }
 ```
@@ -295,6 +295,8 @@ Start with `dino_data` and calculate a summary statistic that we will call `r` a
 ```{r}
 dino_data %>%
   summarize(r = cor(x, y))
+
+add_corr(dino_data, "dino")
 ```
 
 🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 2". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
