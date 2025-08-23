@@ -1,10 +1,6 @@
 ---
 title: "Lab 01 - Hello R!"
 output: pdf_document
-link-citations: true
-editor_options: 
-  markdown: 
-    wrap: sentence
 ---
 
 > R is the name of the programming language itself and RStudio is a convenient interface.
@@ -247,7 +243,7 @@ ggplot(correlation_log, aes(x = step, y = r)) +
   )
 ```
 
-🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 1". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+???? ??? ?????? *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 1". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 ## Exercise #2
 
@@ -306,7 +302,7 @@ dino_data %>%
 add_corr(dino_data, "dino")
 ```
 
-🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 2". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+???? ??? ?????? *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 2". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 ## Exercise #3
 
@@ -332,7 +328,7 @@ star_data %>%
 add_corr(star_data, "star")
 ```
 
-🧶 ✅ ⬆️ *This is another good place to pause, knit, commit changes with the commit message "Added answer for Ex 3", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+???? ??? ?????? *This is another good place to pause, knit, commit changes with the commit message "Added answer for Ex 3", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 ## Exercise #4
 
@@ -356,7 +352,7 @@ circle_data %>% summarize(r = cor(x, y))
 add_corr(circle_data, "circle")
 ```
 
-🧶 ✅ ⬆️ *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+???? ??? ?????? *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 > Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
 
@@ -422,4 +418,4 @@ Play around with these until you're happy with the look.
 > Maybe a teammate can help?
 > Or you can ask your TA as well!
 
-🧶 ✅ ⬆️ *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!* 💪*", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
+???? ??? ?????? *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!* ????*", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
