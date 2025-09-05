@@ -1,13 +1,25 @@
 ---
 title: "Lab 01 - Hello R!"
-output: pdf_document
+output: 
+  tufte::tufte_html:
+    css: ../lab.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: true
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
 
-> R is the name of the programming language itself and RStudio is a convenient interface.
+```{marginfigure}
+R is the name of the programming language itself and RStudio is a convenient interface.
+```
 
 The main goal of this lab is to introduce you to R and RStudio, which we will be using throughout the course both to learn the statistical concepts discussed in the course and to analyze real data and come to informed conclusions.
 
-> git is a version control system (like "Track Changes" features from Microsoft Word on steroids) and GitHub is the home for your Git-based projects on the internet (like DropBox but much, much better).
+```{marginfigure}
+git is a version control system (like "Track Changes" features from Microsoft Word on steroids) and GitHub is the home for your Git-based projects on the internet (like DropBox but much, much better).
+```
 
 An additional goal is to introduce you to Git and GitHub, which is the collaboration and version control system that we will be using throughout the course.
 
@@ -96,10 +108,9 @@ knitr::include_graphics("img/paste-gh-repo-url.png")
 
 Before we introduce the data, let's warm up with some simple exercises.
 
-> The top portion of your R Markdown file (between the three dashed lines) is called YAML.
-> It stands for "YAML Ain't Markup Language".
-> It is a human friendly data serialization standard for all programming languages.
-> All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
+```{marginfigure}
+The top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for "YAML Ain't Markup Language". It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
+```
 
 ### YAML
 
@@ -157,8 +168,9 @@ Note that the packages are also loaded with the same commands in your R Markdown
 
 ## Data
 
-> If it's confusing that the data frame is called `datasaurus_dozen` when it contains 13 datasets, you're not alone!
-> Have you heard of a [baker's dozen](https://en.wikipedia.org/wiki/Dozen#Baker's_dozen)?
+```{marginfigure}
+If it's confusing that the data frame is called `datasaurus_dozen` when it contains 13 datasets, you're not alone! Have you heard of a [baker's dozen](https://en.wikipedia.org/wiki/Dozen#Baker's_dozen)?
+```
 
 The data frame we will be working with today is called `datasaurus_dozen` and it's in the `datasauRus` package.
 Actually, this single data frame contains 13 datasets, designed to show us why data visualisation is important and how summary statistics alone can be misleading.
@@ -170,15 +182,7 @@ This command must be ran in the Console.
 
 # Exercises
 
-## Exercise #1
-
-Based on the help file, how many rows and how many columns does the `datasaurus_dozen` file have?
-What are the variables included in the data frame?
-Add your responses to your lab report.
-
-```{r}
-datasaurus_dozen %>% glimpse()
-```
+1.  Based on the help file, how many rows and how many columns does the `datasaurus_dozen` file have? What are the variables included in the data frame? Add your responses to your lab report.
 
 Let's take a look at what these datasets are.
 To do so we can make a *frequency table* of the dataset variable:
@@ -189,66 +193,17 @@ datasaurus_dozen %>%
   print(13)
 ```
 
-> Matejka, Justin, and George Fitzmaurice.
-> "Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing." Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems.
-> ACM, 2017.
+```{marginfigure}
+Matejka, Justin, and George Fitzmaurice. "Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing." Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems. ACM, 2017.
+```
 
 The original Datasaurus (`dino`) was created by Alberto Cairo in [this great blog post](http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html).
 The other Dozen were generated using simulated annealing and the process is described in the paper *Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics* through Simulated Annealing by Justin Matejka and George Fitzmaurice.
 In the paper, the authors simulate a variety of datasets that have the same summary statistics as the Datasaurus but have very different distributions.
 
-```{r}
-correlation_log <- tibble::tibble(
-  step = integer(),
-  dataset = character(),
-  r = numeric(),
-  n = integer(),
-  method = character(),
-  time = as.POSIXct(character())
-)
-```
+🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 1". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-```{r}
-add_corr <- function(df, dataset_label, x_col = "x", y_col = "y", method = "pearson") {
-  stopifnot(x_col %in% names(df), y_col %in% names(df))
-  r_val <- stats::cor(df[[x_col]], df[[y_col]], method = method, use = "complete.obs")
-  new_row <- tibble::tibble(
-    step = if (nrow(correlation_log) == 0) 1L else max(correlation_log$step) + 1L,
-    dataset = dataset_label,
-    r = r_val,
-    n = nrow(df),
-    method = method,
-    time = Sys.time()
-  )
-  # append to the persistent log
-  correlation_log <<- dplyr::bind_rows(correlation_log, new_row)
-  new_row
-}
-
-```
-
-```{r}
-ggplot(correlation_log, aes(x = step, y = r)) +
-  geom_line() +
-  geom_point(size = 2) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  scale_x_continuous(
-    breaks = correlation_log$step,
-    labels = correlation_log$dataset
-  ) +
-  labs(
-    title = "Correlation log (updates as you add)",
-    x = "Dataset (order added)",
-    y = "Pearson r"
-  )
-```
-
-???? ??? ?????? *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 1". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
-
-## Exercise #2
-
-Plot `y` vs. `x` for the `dino` dataset.
-Then, calculate the correlation coefficient between `x` and `y` for this dataset.
+2.  Plot `y` vs. `x` for the `dino` dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset.
 
 Below is the code you will need to complete this exercise.
 Basically, the answer is already given, but you need to include relevant bits in your Rmd document and successfully knit it and view the results.
@@ -293,80 +248,36 @@ In this case, calculating a correlation coefficient really doesn't make sense si
 
 But, for illustrative purposes, let's calculate the correlation coefficient between `x` and `y`.
 
-> Start with `dino_data` and calculate a summary statistic that we will call `r` as the `cor`relation between `x` and `y`.
+```{marginfigure}
+Start with `dino_data` and calculate a summary statistic that we will call `r` as the `cor`relation between `x` and `y`.
+```
 
 ```{r}
 dino_data %>%
   summarize(r = cor(x, y))
-
-add_corr(dino_data, "dino")
 ```
 
-???? ??? ?????? *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 2". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 2". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-## Exercise #3
+3.  Plot `y` vs. `x` for the `star` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. How does this value compare to the `r` of `dino`?
 
-Plot `y` vs. `x` for the `star` dataset.
-You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset.
-Then, calculate the correlation coefficient between `x` and `y` for this dataset.
-How does this value compare to the `r` of `dino`?
+🧶 ✅ ⬆️ *This is another good place to pause, knit, commit changes with the commit message "Added answer for Ex 3", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-```{r}
-star_data <- datasaurus_dozen |>
-  filter(dataset == "star")
+4.  Plot `y` vs. `x` for the `circle` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. How does this value compare to the `r` of `dino`?
+
+🧶 ✅ ⬆️ *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+```{marginfigure}
+Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
 ```
 
-```{r}
-ggplot(star_data, aes(x = x, y = y))+
-  geom_point() 
-```
+5.  Finally, let's plot all datasets at once. In order to do this we will make use of faceting.
 
-```{r}
-star_data %>%
-  summarize(r = cor(x, y))
-
-add_corr(star_data, "star")
-```
-
-???? ??? ?????? *This is another good place to pause, knit, commit changes with the commit message "Added answer for Ex 3", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
-
-## Exercise #4
-
-Plot `y` vs. `x` for the `circle` dataset.
-You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset.
-Then, calculate the correlation coefficient between `x` and `y` for this dataset.
-How does this value compare to the `r` of `dino`?
-
-```{r}
-circle_data <- datasaurus_dozen %>% filter(dataset == "circle")
-```
-
-```{r}
-ggplot(circle_data, aes(x = x, y = y)) +
-  geom_point() +
-  labs(title = "Datasaurus: circle", x = "x", y = "y")
-```
-
-```{r}
-circle_data %>% summarize(r = cor(x, y))
-add_corr(circle_data, "circle")
-```
-
-???? ??? ?????? *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
-
-> Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
-
-## Exercise #5
-
-Finally, let's plot all datasets at once.
-In order to do this we will make use of faceting.
-
-```{r all-viz, eval=FALSE, fig.fullwidth=TRUE, fig.height=12, fig.width=10}
-ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset)) +
-  geom_point() +
+```{r all-viz, eval=FALSE, fig.fullwidth=TRUE}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
+  geom_point()+
   facet_wrap(~ dataset, ncol = 3) +
   theme(legend.position = "none")
-
 ```
 
 And we can use the `group_by` function to generate all the summary correlation coefficients.
@@ -384,7 +295,7 @@ You're done with the data analysis exercises, but we'd like you to do two more t
 knitr::include_graphics("img/fig-resize-global.png")
 ```
 
-# **Resize your figures**
+-   **Resize your figures:**
 
 Click on the gear icon in on top of the R Markdown document, and select "Output Options..." in the dropdown menu.
 In the pop up dialogue box go to the Figures tab and change the height and width of the figures, and hit OK when done.
@@ -401,21 +312,21 @@ To do so click on the gear icon within the chunk where you want to make a change
 Changing the figure sizes added new options to these chunks: `fig.width` and `fig.height`.
 You can change them by defining different values directly in your R Markdown document as well.
 
-```{r theme-highlight, echo=FALSE, fig.margin=TRUE}
+```{r theme-highlight, fig.margin = TRUE, echo = FALSE, fig.width=3}
 knitr::include_graphics("img/theme-highlight.png")
 ```
 
-# **Change the look of your report:**
+-   **Change the look of your report:**
 
 Once again click on the gear icon in on top of the R Markdown document, and select "Output Options..." in the dropdown menu.
 In the General tab of the pop up dialogue box try out different Syntax highlighting and theme options.
 Hit OK and knit your document to see how it looks.
 Play around with these until you're happy with the look.
 
-------------------------------------------------------------------------
+<br>
 
-> Not sure how to use emojis on your computer?
-> Maybe a teammate can help?
-> Or you can ask your TA as well!
+```{marginfigure}
+Not sure how to use emojis on your computer? Maybe a teammate can help? Or you can ask your TA as well!
+```
 
-???? ??? ?????? *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!* ????*", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
+🧶 ✅ ⬆️ *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!* 💪*", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
