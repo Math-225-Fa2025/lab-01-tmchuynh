@@ -3,6 +3,11 @@ title: "Lab 01 - Hello R!"
 output: 
   pdf_document:
     latex_engine: xelatex
+    toc: true
+    number_sections: true
+    fig_caption: true
+    citation_package: natbib
+    keep_tex: true
   tufte::tufte_html:
     css: ../lab.css
     tufte_variant: "envisioned"
