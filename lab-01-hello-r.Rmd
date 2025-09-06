@@ -2,7 +2,7 @@
 title: "Lab 01 - Hello R!"
 output: 
   pdf_document:
-  latex_engine:xelatex
+    latex_engine: xelatex
   tufte::tufte_html:
     css: ../lab.css
     tufte_variant: "envisioned"
